@@ -1,10 +1,73 @@
 "use client";
 
+import Link from "next/link";
+import { FaYoutube, FaFacebookF, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
+
+/* ─────────── EDIT YOUR LINKS HERE ─────────── */
+
 const LINKS = [
-  { title: "About Teruah Global Ministries", desc: "Our vision, mission, and mandate." },
-  { title: "Apostle Steve", desc: "His calling and ministry." },
-  { title: "Social Media", desc: "Follow and engage with us daily." },
+  {
+    title: "About Teruah Global Ministries",
+    desc: "Our vision, mission, and mandate.",
+    href: "/about", // change to your real page, e.g. "/#about" if it's a section
+  },
+  {
+    title: "Apostle Steve",
+    desc: "His calling and ministry.",
+    href: "/apostle-steve", // change to your real page
+  },
+  {
+    title: "Social Media",
+    desc: "Follow and engage with us daily.",
+    href: "#social", // scrolls to the social icons on this page
+  },
 ];
+// WhatsApp number: international format, digits only (+254 111 755 539 -> 254111755539)
+const WHATSAPP_NUMBER = "254111755539";
+const WHATSAPP_MESSAGE = "Hello Teruah Global Ministries, I would like to connect.";
+const SOCIALS = [
+  {
+    name: "TikTok",
+    href: "https://www.tiktok.com/@apostle_steve_?is_from_webapp=1&sender_device=pc",
+    Icon: FaTiktok,
+  },
+    {
+    name: "WhatsApp",
+    href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`,
+    Icon: FaWhatsapp,
+  },
+  {
+    name: "Email",
+    href: "mailto:stephenmuthusi001@gmail.com",
+    Icon: MdOutlineEmail,
+  },
+  {
+    name: "Facebook",
+    href: "https://web.facebook.com/ApostleSteve.M",
+    Icon: FaFacebookF,
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@Teruahglobalministries",
+    Icon: FaYoutube,
+  },
+];
+
+/* ──────────────────────────────────────────── */
+
+const Arrow = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    className="shrink-0 transition-transform group-hover:translate-x-1"
+    aria-hidden="true"
+  >
+    <path d="M3 8h10M9 4l4 4-4 4" stroke="#8A93A8" strokeWidth="1.3" />
+  </svg>
+);
 
 export default function Connect() {
   return (
@@ -20,34 +83,38 @@ export default function Connect() {
             walk with you.
           </p>
 
-          <div className="mt-10 flex gap-4">
-            {["YouTube", "Facebook", "Instagram", "TikTok", "X"].map((platform) => (
-              <a
-                key={platform}
-                href="#"
-                aria-label={platform}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-navy-line text-slate-soft transition-colors hover:border-gold hover:text-gold"
-              >
-                <span className="text-[13px] font-medium">{platform.slice(0, 2)}</span>
-              </a>
-            ))}
+          <div id="social" className="mt-10 flex flex-wrap gap-4 scroll-mt-28">
+            {SOCIALS.map(({ name, href, Icon }) => {
+              const isExternal = href.startsWith("http");
+              return (
+                <a
+                  key={name}
+                  href={href}
+                  aria-label={name}
+                  title={name}
+                  {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-navy-line text-slate-soft transition-colors hover:border-gold hover:text-gold"
+                >
+                  <Icon size={18} />
+                </a>
+              );
+            })}
           </div>
         </div>
 
         <div className="grid gap-4">
           {LINKS.map((l) => (
-            <div
+            <Link
               key={l.title}
-              className="flex items-center justify-between gap-6 rounded-sm border border-navy-line bg-navy-surface p-6"
+              href={l.href}
+              className="group flex items-center justify-between gap-6 rounded-sm border border-navy-line bg-navy-surface p-6 transition-colors hover:border-gold"
             >
               <div>
                 <h3 className="text-[15px] text-ivory">{l.title}</h3>
                 <p className="mt-1 text-[13px] text-slate-soft">{l.desc}</p>
               </div>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="#8A93A8" strokeWidth="1.3" />
-              </svg>
-            </div>
+              <Arrow />
+            </Link>
           ))}
 
           <form
