@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { FaYoutube, FaFacebookF, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
+import { SOCIALS } from "@/lib/socials";
 
 /* ─────────── EDIT YOUR LINKS HERE ─────────── */
 
@@ -20,39 +22,13 @@ const LINKS = [
   {
     title: "Social Media",
     desc: "Follow and engage with us daily.",
-    href: "#social", // scrolls to the social icons on this page
+    href: "/social", // scrolls to the social icons on this page
   },
 ];
 // WhatsApp number: international format, digits only (+254 111 755 539 -> 254111755539)
 const WHATSAPP_NUMBER = "254111755539";
 const WHATSAPP_MESSAGE = "Hello Teruah Global Ministries, I would like to connect.";
-const SOCIALS = [
-  {
-    name: "TikTok",
-    href: "https://www.tiktok.com/@apostle_steve_?is_from_webapp=1&sender_device=pc",
-    Icon: FaTiktok,
-  },
-    {
-    name: "WhatsApp",
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`,
-    Icon: FaWhatsapp,
-  },
-  {
-    name: "Email",
-    href: "mailto:stephenmuthusi001@gmail.com",
-    Icon: MdOutlineEmail,
-  },
-  {
-    name: "Facebook",
-    href: "https://web.facebook.com/profile.php?id=61579206504792",
-    Icon: FaFacebookF,
-  },
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com/@Teruahglobalministries",
-    Icon: FaYoutube,
-  },
-];
+
 
 /* ──────────────────────────────────────────── */
 
@@ -117,27 +93,7 @@ export default function Connect() {
             </Link>
           ))}
 
-          <form
-            className="mt-2 flex flex-col gap-4 rounded-sm border border-navy-line bg-navy-surface p-6 sm:flex-row"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <label htmlFor="contact-email" className="sr-only">
-              Your email
-            </label>
-            <input
-              id="contact-email"
-              type="email"
-              required
-              placeholder="you@example.com"
-              className="w-full rounded-sm border border-navy-line bg-navy-deep px-5 py-3.5 text-[15px] text-ivory placeholder:text-slate-soft focus:border-gold"
-            />
-            <button
-              type="submit"
-              className="shrink-0 rounded-sm border border-gold px-6 py-3.5 text-[15px] font-medium text-gold hover:bg-gold hover:text-navy-deep transition-colors"
-            >
-              Get in Touch
-            </button>
-          </form>
+          
         </div>
       </div>
     </section>
